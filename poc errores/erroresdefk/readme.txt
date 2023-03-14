@@ -1,0 +1,1 @@
+Aquí, en ésta miniaplicacíon se controla los errores de Foreing Key que puede dar la aplicación

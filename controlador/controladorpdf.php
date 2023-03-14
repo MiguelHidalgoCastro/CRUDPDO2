@@ -43,6 +43,11 @@ class ControladorPDF
         $pdf->SetFont('Times', '', 12);
         $header = array('Nombre', 'Profesor', 'Dirigido', 'Inicio Reto', 'Fin Reto');
         $pdf->tablaretos($header, $retos, $this->modeloprofesores);
+        /**No me enteré que habia que hacer un salto de página por lo que genero otra página */
+        $pdf->AddPage();
+        /** Y pongo de nuevo otra tabla igual pero con los retos no publicados*/
+        $retosno = $this->modeloretos->listarNoPublicados();
+        $pdf->tablaretos($header, $retosno, $this->modeloprofesores);
         $pdf->Output('retos.pdf', 'D');
     }
 

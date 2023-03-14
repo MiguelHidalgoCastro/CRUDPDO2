@@ -1,3 +1,32 @@
+/*UTILIZADO AL FINAL*/
+
+DELIMITER $$
+
+CREATE TRIGGER comprobar_f_inscripcion
+BEFORE INSERT ON retos
+FOR EACH ROW 
+BEGIN
+    IF (NEW.fechaInicioInscripcion > NEW.fechaFinInscripcion) 
+      THEN SIGNAL sqlstate '45001' set message_text = "Fecha Fin Inscripción < Fecha Inicio Inscripcion";
+    END IF; 
+
+END; $$
+
+DELIMITER $$
+
+CREATE TRIGGER comprobar_f_retos
+BEFORE INSERT ON retos
+FOR EACH ROW 
+BEGIN
+    IF (NEW.fechaInicioReto > NEW.fechaFinReto) 
+      THEN SIGNAL sqlstate '45001' set message_text = "Fecha Fin Reto < Fecha Inicio Reto";
+    END IF; 
+END; $$
+
+
+
+/* PRUEBAS */
+
 DELIMITER $$
 
 CREATE TRIGGER comprobar_edad
@@ -82,3 +111,4 @@ BEGIN
 	 	 SIGNAL sqlstate '45001' set message_text = "FechaFinInscripcion > FechaInicioReto";
     END IF; 
 END
+
